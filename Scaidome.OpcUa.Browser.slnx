@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Scaidome.OpcUa.Browser/Scaidome.OpcUa.Browser.csproj" />
+  </Folder>
+</Solution>

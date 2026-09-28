@@ -1,0 +1,50 @@
+<UserControl x:Class="Scaidome.OpcUa.Browser.Views.WriteValueDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Scaidome.OpcUa.Browser.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:WriteValueViewModel}"
+             Style="{StaticResource OverlayDialog}">
+
+    <StackPanel Width="420">
+        <TextBlock Text="Write Value" Style="{StaticResource DialogTitle}"/>
+
+        <TextBlock Text="{Binding Item.DisplayName}" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}"/>
+        <TextBlock Text="{Binding Item.NodeId}" FontSize="12" Style="{StaticResource SecondaryText}" Margin="0,2,0,16"/>
+
+        <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="Data type" Style="{StaticResource FieldLabel}"/>
+                <TextBlock Text="{Binding DataTypeName}" FontWeight="SemiBold"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Current value" Style="{StaticResource FieldLabel}"/>
+                <TextBlock Text="{Binding CurrentValueText}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
+                           ToolTip="{Binding CurrentValueText}"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Text="New value" Style="{StaticResource FieldLabel}"/>
+        <TextBox x:Name="NewValueBox" Text="{Binding NewValue, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding WriteCommand}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <TextBlock Text="{Binding ReadOnlyReason}" Foreground="{StaticResource WarningBrush}" TextWrapping="Wrap" Margin="0,0,0,8"
+                   Visibility="{Binding ReadOnlyReason, Converter={StaticResource HasValueToVisibility}}"/>
+        <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorText}"
+                   Visibility="{Binding ErrorMessage, Converter={StaticResource HasValueToVisibility}}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+            <Button Content="Cancel" Style="{StaticResource SecondaryButton}" Command="{Binding CloseCommand}"/>
+            <Button Content="Write" Style="{StaticResource PrimaryButton}" Command="{Binding WriteCommand}" Margin="8,0,0,0"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

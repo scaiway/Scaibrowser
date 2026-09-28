@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.2" />
+    <PackageVersion Include="Scaidome.OpcUa.Client" Version="1.0.3" />
+  </ItemGroup>
+</Project>
